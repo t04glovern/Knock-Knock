@@ -24,7 +24,7 @@ glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(1, 0.94902, 0.8, 1)
 fog_light_energy = 0.02
-fog_density = 0.6431
+fog_density = 0.45
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1uis"]
 albedo_color = Color(0.556863, 1, 0.34902, 1)
