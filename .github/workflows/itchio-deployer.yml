@@ -28,8 +28,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+          godot --headless --verbose --export-release "Windows Desktop" build/windows/$EXPORT_NAME.exe
       - name: Itch.io Deploy
         run: |
           butler push ./build/windows $ITCHIO_USERNAME/$ITCHIO_GAME:windows
@@ -55,8 +54,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
+          godot --headless --verbose --export-release "Linux/X11" build/linux/$EXPORT_NAME.x86_64
       - name: Itch.io Deploy
         run: |
           butler push ./build/linux $ITCHIO_USERNAME/$ITCHIO_GAME:linux
@@ -82,8 +80,7 @@ jobs:
       - name: Mac Build
         run: |
           mkdir -v -p build/mac
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Mac OSX" ../build/mac/$EXPORT_NAME.zip
+          godot --headless --verbose --export-release "Mac OSX" build/mac/$EXPORT_NAME.zip
       - name: Itch.io Deploy
         run: |
           butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac
