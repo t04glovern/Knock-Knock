@@ -19,7 +19,7 @@ var walk_vel: Vector3 # Walking velocity
 var grav_vel: Vector3 # Gravity velocity 
 var jump_vel: Vector3 # Jumping velocity
 
-@onready var camera: Camera3D = $Camera3D
+@onready var camera: Camera3D = $PlayerInteractions
 
 func _ready() -> void:
 	capture_mouse()

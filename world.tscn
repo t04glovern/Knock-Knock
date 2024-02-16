@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cupbpqy4wort8"]
+[gd_scene load_steps=12 format=3 uid="uid://cupbpqy4wort8"]
 
 [ext_resource type="MeshLibrary" uid="uid://dvk63i0581pcw" path="res://tileset.tres" id="1_57cci"]
+[ext_resource type="AudioStream" uid="uid://bsu8wkjgkkmm2" path="res://Audio/sick-snares.wav" id="1_t0ad7"]
 [ext_resource type="Script" path="res://Player.gd" id="2_6ue05"]
-[ext_resource type="Script" path="res://Camera3D.gd" id="3_24tqg"]
+[ext_resource type="Script" path="res://Scripts/PlayerInteractions.gd" id="3_oy0lc"]
+[ext_resource type="PackedScene" uid="uid://cckolhcjp1ynd" path="res://torch.tscn" id="4_jrua6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4r403"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,7 +24,7 @@ glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(1, 0.94902, 0.8, 1)
 fog_light_energy = 0.02
-fog_density = 0.3914
+fog_density = 0.6431
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1uis"]
 albedo_color = Color(0.556863, 1, 0.34902, 1)
@@ -33,6 +35,11 @@ material = SubResource("StandardMaterial3D_g1uis")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ign7y"]
 
 [node name="World" type="Node"]
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_t0ad7")
+volume_db = -5.0
+autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lv3i4")
@@ -56,17 +63,26 @@ mesh = SubResource("CapsuleMesh_ntpj0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_ign7y")
 
-[node name="Camera3D" type="Camera3D" parent="Player" node_paths=PackedStringArray("gridmap")]
+[node name="PlayerInteractions" type="Camera3D" parent="Player" node_paths=PackedStringArray("gridmap")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.365374)
-script = ExtResource("3_24tqg")
+script = ExtResource("3_oy0lc")
 gridmap = NodePath("../../GridMap")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Player/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
-light_color = Color(1, 0.94902, 0.8, 1)
-light_energy = 1.183
-spot_range = 7.5
-spot_angle = 75.0
+[node name="Torch" parent="Player/PlayerInteractions" instance=ExtResource("4_jrua6")]
+transform = Transform3D(-1.5299e-08, -2.9851e-16, 0.35, 0.0824363, 0.340153, 3.6034e-09, -0.340153, 0.0824363, -1.48686e-08, -0.317645, -0.530771, -0.503244)
 
-[node name="RayCast3D" type="RayCast3D" parent="Player/Camera3D"]
+[node name="TorchLight" type="SpotLight3D" parent="Player/PlayerInteractions/Torch"]
+transform = Transform3D(-4.37114e-08, -0.0264211, -0.999651, -8.56238e-15, 0.999651, -0.0264211, 1, -1.1549e-09, -4.36961e-08, 0.993634, 0.0536764, -5.96046e-08)
+light_color = Color(1, 0.94902, 0.8, 1)
+light_energy = 1.2
+spot_range = 7.5
+spot_angle = 40.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/PlayerInteractions"]
 transform = Transform3D(1.5, 0, 0, 0, 0.742528, -1.30332, 0, 1.30332, 0.742528, 0, 0, 0)
+
+[node name="TorchClicker" type="AudioStreamPlayer3D" parent="Player/PlayerInteractions"]
+
+[node name="KnockKnock" type="AudioStreamPlayer3D" parent="Player/PlayerInteractions"]
+
+[node name="GodlyVoice" type="AudioStreamPlayer3D" parent="Player/PlayerInteractions"]
