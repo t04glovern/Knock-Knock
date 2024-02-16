@@ -35,22 +35,9 @@ jobs:
         with:
           name: windows
           path: build/windows
-
-  release_windows:
-    name: Windows Release
-    needs: export_windows
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.2.1
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: windows
-          path: build/windows
       - name: Itch.io Deploy
         run: |
-          butler push build/windows $ITCHIO_USER/$ITCHIO_GAME:windows
+          butler push ./build/windows $ITCHIO_USER/$ITCHIO_GAME:windows
 
   export_linux:
     name: Linux Export
@@ -71,27 +58,9 @@ jobs:
           mkdir -v -p build/linux
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: linux
-          path: build/linux
-
-  release_linux:
-    name: Linux Release
-    needs: export_linux
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.2.1
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: linux
-          path: build/linux
       - name: Itch.io Deploy
         run: |
-          butler push build/linux $ITCHIO_USER/$ITCHIO_GAME:linux
+          butler push ./build/linux $ITCHIO_USER/$ITCHIO_GAME:linux
 
   export_mac:
     name: Mac Export
@@ -112,24 +81,6 @@ jobs:
           mkdir -v -p build/mac
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Mac OSX" ../build/mac/$EXPORT_NAME.zip
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: mac
-          path: build/mac
-
-  release_mac:
-    name: Mac Release
-    needs: export_mac
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.2.1
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: mac
-          path: build/mac
       - name: Itch.io Deploy
         run: |
-          butler push build/mac $ITCHIO_USER/$ITCHIO_GAME:mac
+          butler push ./build/mac $ITCHIO_USER/$ITCHIO_GAME:mac
