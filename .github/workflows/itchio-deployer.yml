@@ -30,11 +30,6 @@ jobs:
           mkdir -v -p build/windows
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: windows
-          path: build/windows
       - name: Itch.io Deploy
         run: |
           butler push ./build/windows $ITCHIO_USER/$ITCHIO_GAME:windows
