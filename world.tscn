@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cupbpqy4wort8"]
+[gd_scene load_steps=19 format=3 uid="uid://cupbpqy4wort8"]
 
 [ext_resource type="MeshLibrary" uid="uid://dvk63i0581pcw" path="res://tileset.tres" id="1_57cci"]
 [ext_resource type="AudioStream" uid="uid://bsu8wkjgkkmm2" path="res://Audio/sick-snares.wav" id="1_t0ad7"]
 [ext_resource type="Script" path="res://Player.gd" id="2_6ue05"]
 [ext_resource type="Script" path="res://Scripts/PlayerInteractions.gd" id="3_oy0lc"]
-[ext_resource type="PackedScene" uid="uid://cckolhcjp1ynd" path="res://torch.tscn" id="4_jrua6"]
+[ext_resource type="PackedScene" uid="uid://cckolhcjp1ynd" path="res://Equipment/torch.tscn" id="4_jrua6"]
+[ext_resource type="Shader" path="res://wood.gdshader" id="6_4dbke"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4r403"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,6 +34,146 @@ albedo_color = Color(0.556863, 1, 0.34902, 1)
 material = SubResource("StandardMaterial3D_g1uis")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ign7y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfsxq"]
+render_priority = 0
+shader = ExtResource("6_4dbke")
+shader_parameter/light_color = Vector4(0.952941, 0.858824, 0.74902, 1)
+shader_parameter/dark_color = Vector4(0.74902, 0.619608, 0.490196, 1)
+shader_parameter/ring_scale = 4.4
+shader_parameter/wave_scale = 8.454
+shader_parameter/random_scale = 4.6
+shader_parameter/noise_scale = 0.03
+
+[sub_resource type="BoxMesh" id="BoxMesh_4vu2i"]
+material = SubResource("ShaderMaterial_qfsxq")
+
+[sub_resource type="Animation" id="Animation_w0rx5"]
+resource_name = "idle"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stick:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stick/StickMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0.265013, -0.489232, -0.33117), Vector3(0.265013, -0.518518, -0.33117)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stick/StickMesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0.222861), Vector3(0, 0, 0.313339)]
+}
+
+[sub_resource type="Animation" id="Animation_ykapo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stick:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stick/StickMesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.265013, -0.489232, -0.33117)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stick/StickMesh:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.222861)]
+}
+
+[sub_resource type="Animation" id="Animation_44uvf"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stick/StickMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.161643, -0.347234, -0.33117)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stick/StickMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.981905)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stick:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.638494, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08wpc"]
+_data = {
+"RESET": SubResource("Animation_ykapo"),
+"attack": SubResource("Animation_44uvf"),
+"idle": SubResource("Animation_w0rx5")
+}
 
 [node name="World" type="Node"]
 
@@ -64,7 +205,7 @@ mesh = SubResource("CapsuleMesh_ntpj0")
 shape = SubResource("CapsuleShape3D_ign7y")
 
 [node name="PlayerInteractions" type="Camera3D" parent="Player" node_paths=PackedStringArray("gridmap")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.365374)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 script = ExtResource("3_oy0lc")
 gridmap = NodePath("../../GridMap")
 
@@ -86,3 +227,20 @@ transform = Transform3D(1.5, 0, 0, 0, 0.742528, -1.30332, 0, 1.30332, 0.742528, 
 [node name="KnockKnock" type="AudioStreamPlayer3D" parent="Player/PlayerInteractions"]
 
 [node name="GodlyVoice" type="AudioStreamPlayer3D" parent="Player/PlayerInteractions"]
+
+[node name="Swish" type="AudioStreamPlayer3D" parent="Player/PlayerInteractions"]
+
+[node name="Stick" type="Node3D" parent="Player/PlayerInteractions"]
+
+[node name="StickMesh" type="MeshInstance3D" parent="Player/PlayerInteractions/Stick"]
+transform = Transform3D(0.0487635, 0.221021, 0, 0.011051, -0.975269, 0, 0, 0, 0.05, 0.265013, -0.489232, -0.33117)
+mesh = SubResource("BoxMesh_4vu2i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/PlayerInteractions"]
+libraries = {
+"": SubResource("AnimationLibrary_08wpc")
+}
+autoplay = "idle"
+playback_default_blend_time = 0.1
+
+[connection signal="animation_finished" from="Player/PlayerInteractions/AnimationPlayer" to="Player/PlayerInteractions" method="_on_animation_player_animation_finished"]
